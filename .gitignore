@@ -1,0 +1,12 @@
+node_modules/
+.openai/
+.impeccable/
+.env
+.env.*
+!.env.example
+*.log
+*.tar.gz
+*.zip
+__pycache__/
+.DS_Store
+Thumbs.db
