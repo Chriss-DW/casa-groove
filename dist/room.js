@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from './assets/OrbitControls.js';
 import { RoundedBoxGeometry } from './assets/RoundedBoxGeometry.js';
-import { mountCatalog, mountCatalogFilters } from './objects.js?v=3';
+import { mountCatalog } from './objects.js?v=4';
 
 const host = document.querySelector('#room');
 const status = document.querySelector('#status');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-mountCatalogFilters();
 let toastTimer;
 function announce(message) {
   status.textContent = message;
@@ -14,31 +13,6 @@ function announce(message) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => status.classList.remove('visible'), 3500);
 }
-
-const descriptions = {
-  lamp: ['La honguito', 'Una silueta redonda en naranja quemado, con una luz que cambia el ánimo de toda la sala. Tocá la lámpara en la escena o elegí “De noche” para encenderla. Pieza conceptual modelada para Casa Groove.'],
-  sofa: ['El sofá de las cinco', 'Brazos redondeados, asiento profundo y un tapizado que invita a quedarse. Probá oliva, terracota, mostaza o rosa antiguo: la misma habitación puede sentirse muy distinta. Pieza conceptual, sin catálogo comercial.'],
-  table: ['La sobremesa', 'Una mesa baja de madera, con cantos suaves y espacio para un libro, un café y una charla que se alarga. Su calidez equilibra el damero de la alfombra y los colores del ambiente.'],
-  pendant: ['Un pequeño sol', 'Una esfera opalina suspendida de un cable fino. Probá encenderla y mirarla de noche: el mismo objeto cambia por completo con una luz suave. Pieza conceptual de Casa Groove.'],
-  poster: ['Algo que florece', 'Flores, tinta y una cuadrícula que recuerda a la gráfica setentera. El marco de madera conecta el papel con el resto de la casa. Podés probar esta gráfica o la versión de ondas en la sala.'],
-  vinyl: ['El lado bueno', 'Un vinilo negro con etiqueta terracota y una funda de ondas. El ritual de elegir un lado, apoyar la aguja y tomarse un momento. Abajo podés poner a sonar tres ambientes originales.'],
-  turntable: ['La vuelta de siempre', 'Base de madera, plato metálico y un brazo que baja sobre el disco. Un objeto pensado para estar a la vista y usarse sin apuro. El tocadiscos de la siguiente sección reproduce música ambiental al pulsar Reproducir.'],
-};
-let selectedObjectButton;
-document.querySelectorAll('[data-object]').forEach(button => button.addEventListener('click', () => {
-  const [title, copy] = descriptions[button.dataset.object];
-  selectedObjectButton = button;
-  document.querySelector('#detail-title').textContent = title;
-  document.querySelector('#detail-copy').textContent = copy;
-  const detail = document.querySelector('#object-detail');
-  detail.hidden = false;
-  document.querySelector('#close-detail').focus({ preventScroll: true });
-  detail.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' });
-}));
-document.querySelector('#close-detail').addEventListener('click', () => {
-  document.querySelector('#object-detail').hidden = true;
-  selectedObjectButton?.focus({ preventScroll: true });
-});
 
 try {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });

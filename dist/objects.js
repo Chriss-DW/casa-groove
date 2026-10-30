@@ -81,20 +81,19 @@ export function mountCatalog({lamp,sofa,wood,print,waves}) {
   const models={lamp:{model:lamp,height:1.16,span:3.25},pendant:{model:makePendant(),height:1.1,span:2.9},poster:{model:makePoster(print),height:1.05,span:2.9},sofa:{model:sofa,height:.73,span:4.8},vinyl:{model:vinyl,height:1,span:2.8},turntable:{model:makeTurntable(wood),height:.35,span:3.65}};
   let night=false;const lights={lamp:false,pendant:false};
   const catalog=document.querySelector('.catalog');
-  function setView(view){
-    catalog.classList.toggle('model-view',view==='model');
-    document.querySelectorAll('[data-catalog-view]').forEach(button=>{const active=button.dataset.catalogView===view;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
-    if(view==='photo'){
-      night=false;catalog.classList.remove('night-mode');
-      lights.lamp=false;lights.pendant=false;
-      document.querySelectorAll('[data-catalog-light]').forEach(button=>{const active=button.dataset.catalogLight==='day';button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+  function setCardView(id, model) {
+    const card=document.querySelector('[data-product="'+id+'"]');
+    card.classList.toggle('is-model', model);
+    const toggle=card.querySelector('[data-model-toggle]');
+    toggle.setAttribute('aria-pressed', String(model));
+    toggle.textContent=model?'Volver a la foto':'Ver modelo 3D';
+    const button=card.querySelector('[data-lamp]');
+    if(button){
+      const title=card.querySelector('h3').textContent;
+      button.setAttribute('aria-pressed',String(model&&lights[id]));
+      button.setAttribute('aria-label',model?(lights[id]?'Apagar ':'Encender ')+title:'Probar luz en 3D de '+title);
+      button.querySelector('span').textContent=model?(lights[id]?'Apagar':'Encender'):'Probar luz 3D';
     }
-    document.querySelectorAll('[data-lamp]').forEach(button=>{
-      const id=button.dataset.lamp,title=id==='lamp'?'La honguito':'Un pequeño sol',on=lights[id];
-      button.setAttribute('aria-pressed',String(view==='model'&&on));
-      button.setAttribute('aria-label',view==='photo'?`Probar luz en 3D de ${title}`:`${on?'Apagar':'Encender'} ${title}`);
-      button.querySelector('span').textContent=view==='photo'?'Probar luz 3D':on?'Apagar':'Encender';
-    });
   }
   function renderCard(name){
     const item=models[name],scene=new THREE.Scene(),copy=item.model.clone(true);copy.position.set(0,0,0);
@@ -116,24 +115,18 @@ export function mountCatalog({lamp,sofa,wood,print,waves}) {
   }
   const renderAll=()=>Object.keys(models).forEach(renderCard);
   renderAll();
-  setView('photo');
-  document.querySelectorAll('[data-catalog-view]').forEach(button=>button.addEventListener('click',()=>{setView(button.dataset.catalogView);if(button.dataset.catalogView==='model')renderAll();}));
-  document.querySelectorAll('[data-catalog-light]').forEach(button=>button.addEventListener('click',()=>{
-    setView('model');night=button.dataset.catalogLight==='night';catalog.classList.toggle('night-mode',night);
-    document.querySelectorAll('[data-catalog-light]').forEach(other=>{other.classList.toggle('active',other===button);other.setAttribute('aria-pressed',String(other===button));});renderAll();
-  }));
+  document.querySelectorAll('[data-model-toggle]').forEach(button=>{
+    button.disabled=false;
+    button.addEventListener('click',()=>{
+      const id=button.dataset.modelToggle;
+      setCardView(id,!document.querySelector('[data-product="'+id+'"]').classList.contains('is-model'));
+    });
+  });
+  const nightInput=document.querySelector('#model-night');
+  nightInput.disabled=false;
+  nightInput.addEventListener('change',()=>{night=nightInput.checked;renderAll();});
   document.querySelectorAll('[data-lamp]').forEach(button=>button.addEventListener('click',()=>{
-    setView('model');
-    const id=button.dataset.lamp;lights[id]=!lights[id];button.setAttribute('aria-pressed',String(lights[id]));button.setAttribute('aria-label',`${lights[id]?'Apagar':'Encender'} ${id==='lamp'?'La honguito':'Un pequeño sol'}`);button.querySelector('span').textContent=lights[id]?'Apagar':'Encender';renderCard(id);
+    const id=button.dataset.lamp; lights[id]=!lights[id]; setCardView(id,true);renderCard(id);
   }));
   document.body.dataset.catalogReady='true';
-}
-
-// Photographic browsing remains available even if the separate 3D room cannot start.
-export function mountCatalogFilters(){
-  document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
-    document.querySelectorAll('[data-filter]').forEach(other=>{other.classList.toggle('active',other===button);other.setAttribute('aria-pressed',String(other===button));});
-    let count=0;document.querySelectorAll('[data-product]').forEach(card=>{card.hidden=button.dataset.filter!=='all'&&card.dataset.category!==button.dataset.filter;if(!card.hidden)count++;});
-    document.querySelector('#catalog-count').textContent=`${count} ${count===1?'pieza':'piezas'} para tu espacio.`;
-  }));
 }
