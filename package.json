@@ -1,0 +1,20 @@
+{
+  "name": "casa-groove",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Experiencia retro de interiores, música y exploración sin prisa.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/preview.mjs",
+    "test": "node --test scripts/selection.test.mjs",
+    "catalog:build": "node scripts/build-catalog.mjs",
+    "check": "node scripts/check-site.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chriss-DW/casa-groove.git"
+  }
+}
