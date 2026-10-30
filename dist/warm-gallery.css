@@ -1,0 +1,68 @@
+/* One continuous walnut / amber world. Photographs lead; 3D remains exploratory. */
+:root{--orange:#d4aa76;--line:#c9ad872e}
+body{background:#211b18;color:#eee3d0}
+.hero{max-width:none;margin:0}
+.catalog{background:#211b18;padding-top:75px;padding-bottom:80px}
+.section-heading>p{color:#c9b8a1}
+.catalog .section-heading h2 span,.room-section .section-heading h2 span{color:#d4aa76}
+.catalog-toolbar{border-color:#c9ad8738;gap:25px;flex-wrap:wrap}
+.filters button{color:#d7c7b0}
+.filters button.active{background:#d4b17b;color:#2a2018}
+.filters button:hover:not(.active){background:#44352a}
+.catalog-light{gap:18px;margin-left:auto;flex-wrap:wrap}
+.catalog-views{display:flex;gap:15px;align-items:center}
+.catalog-views button{background:none;border:0;border-bottom:1px solid transparent;color:#c8b69d;padding:12px 0;min-height:44px;font-size:11px;white-space:nowrap}
+.catalog-views button.active{color:#f1dfbe;border-color:#d4b17b}
+.catalog .segmented{border-color:#9b7f5a}
+.catalog .segmented button{color:#d9c8ad}
+.catalog .segmented button.active{background:#c8a574;color:#291e15}
+.catalog .product-card,.catalog.night-mode .product-card{--product-bg:#352923;--product-fg:#edddc5}
+.product-visual{height:365px;border-radius:2px}
+.product-art .catalog-photo{display:block;object-fit:cover;filter:brightness(.87) saturate(.82);opacity:1}
+.product-art .model-image{display:none;position:absolute;inset:0;object-fit:contain;pointer-events:none}
+.catalog.model-view .catalog-photo{display:none}
+.catalog.model-view .model-image{display:block}
+.product-art:empty::after{color:#d8c4a6}
+.model-label{display:none;position:absolute;left:18px;top:20px;color:#d3bd9b;font-size:9px;letter-spacing:.02em;z-index:1;pointer-events:none}
+.catalog.model-view .model-label{display:block}
+.product-material{color:#f4e7d3;text-shadow:0 1px 8px #000;z-index:1;bottom:19px;left:19px}
+.product-visual:after{content:"";position:absolute;inset:58% 0 0;background:linear-gradient(transparent,#1d1712a6);pointer-events:none}
+.catalog.model-view .product-visual:after{opacity:.35}
+.lamp-switch{color:#f0dfc3;background:#211b18c9;border-color:#ead5b45e;z-index:2}
+.lamp-switch:hover{background:#493525}
+.lamp-switch[aria-pressed=true]{color:#2c2017;background:#dfc18e;border-color:#dfc18e}
+.product-caption h3{color:#eee0c8}
+.product-caption p{color:#c4b29b}
+.object-open{border-color:#8b745a;color:#e8d4b4}
+.object-open:hover{background:#514030}
+.photo-credit{font-size:9px;color:#b7a087;margin:10px 0 0;line-height:1.8}
+.photo-credit a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:#947d5e70}
+.photo-credit a:hover{color:#f0dfc3}
+.catalog.model-view .photo-credit{visibility:hidden}
+.catalog-caption{color:#bda68c;line-height:1.8;padding-top:28px}
+.object-detail{border-color:#b597703d;color:#e5d5ba}
+.object-detail p{color:#c9b69d}
+.music-section{background:#28201c;border-top:1px solid #c9ad871a}
+.player-shell{background:#34291f}
+.room-section{background:#28221d;border-top:1px solid #c9ad871a;padding-bottom:75px}
+.room-stage{background:#887158}
+.customizer{background:#3b3027;color:#ebdcc4}
+.customizer fieldset{border-color:#c7aa783d}
+.customizer legend{color:#e8d4b6}
+.swatch{border-color:#3b3027}
+.swatch.active{box-shadow:0 0 0 1px #e8d4b6}
+.room-light-options button,.rug-options button,.poster-options button{color:#e7d3b4;border-color:#b2946d80}
+.room-light-options button.active,.rug-options button.active,.poster-options button.active{color:#2e2319;background:#d7b57f;border-color:#d7b57f}
+.customizer .text-button{color:#e8d2ae}
+.room-caption{color:#c2ab8e}
+.manifesto{background:#303128;border-top:1px solid #c9ad8724}
+.big-flower{--paper:#303128;color:#4a4d3b}
+footer{background:#211b18;color:#d5c2a5;border-top:1px solid #c9ad8720}
+footer>a:last-child{border-color:#a187604d}
+.toast{background:#ead8b7;color:#2a2119;box-shadow:0 8px 30px #0003}
+.mini-player{background:#dfc394;color:#2a2119;border-color:#a18760}
+.skip{background:#e4c896;color:#211b18}
+@media(max-width:1150px){.catalog-light{gap:13px}.product-visual{height:330px}}
+@media(max-width:850px){.catalog-toolbar{gap:15px}.catalog-light{margin-left:0;width:100%;justify-content:space-between}.product-visual{height:340px}}
+@media(max-width:600px){.catalog{padding-top:50px;padding-bottom:55px}.product-visual{height:390px}.catalog-light{gap:12px;flex-wrap:nowrap}.catalog-views{gap:12px}.catalog-views button{font-size:10px}.catalog .segmented button{min-width:56px;padding:8px 10px;font-size:10px;gap:4px}.catalog .segmented .icon{width:14px;height:14px}.photo-credit{font-size:10px}.room-section{padding-bottom:55px}}
+@media(max-width:370px){.product-visual{height:330px}.catalog-light{flex-wrap:wrap;gap:13px}.catalog-views{flex:1}.catalog .segmented button{min-width:55px}}

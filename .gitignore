@@ -10,3 +10,10 @@ node_modules/
 __pycache__/
 .DS_Store
 Thumbs.db
+/PRODUCT.md
+/DESIGN.md
+/docs/QA*.md
+/docs/REVIEW*.md
+/docs/propuesta-generativa/
+/docs/surface-brief.md
+/docs/catalogo-brief.md
